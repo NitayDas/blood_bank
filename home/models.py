@@ -32,7 +32,7 @@ class Patient(models.Model):
     gender = models.CharField(max_length=10)
 
     def __str__(self):
-        return self.patient.user.username
+        return self.patient.username
 
 class Donor(models.Model):
     donor = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
