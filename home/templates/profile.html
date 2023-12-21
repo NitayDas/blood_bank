@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %} Blood Donation {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="container-fluid" style="background-color:  #1111">
+                <p><img src="{{donor_profile.image.url}}" alt="" class="img-responsive img-rounded" style="max-width: 80px;"></p> 
+                <br><br>
+                <div class="container-fluid">
+                    {% if donor_profile.ready_to_donate %}
+                    <a href="/change_status/" class="btn btn-success"  font-size: 23px;>I'm Ready To Donate</a>
+                   {% else %}
+                    <a href="/change_status/" class="btn btn-danger"  font-size: 19px;>I'm Not Ready To Donate</a>
+                   {% endif %}
+                </div>
+            </div>
+        </div>
+
+           <div class="col-md-6" >
+               <div class="container-fluid" style="background-color: #1111"><br>
+                   <h4 class="text-center"><strong>{{user}}</strong></h4><br>
+                    <p> <strong>Fullname : </strong>{{user.get_full_name}}</p>
+                    <p><strong>Blood Group : </strong>{{donor_profile.blood_group}}</p>
+                    <p><strong>Email :  </strong>{{user.email}}</p>
+                    <p><strong>Phone :  </strong>{{donor_profile.phone}}</p>
+                    <p><strong>Gender :  </strong>{{donor_profile.gender}}</p>
+                    <p><strong>Date of Birth : </strong>{{donor_profile.date_of_birth}}</p>
+                    <p><strong>Division : </strong> {{donor_profile.state}}</p>
+                    <p><strong>District : </strong> {{donor_profile.city}}</p>
+                    <p><strong>Address : </strong> {{donor_profile.address}}</p>
+                </div>
+                <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #333">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/edit_profile/" class="btn btn-info navbar-btn" style="color:black">Edit Profile</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
