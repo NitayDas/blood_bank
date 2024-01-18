@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Donor_profile</title>
+
+    <style>
+        .navbar {
+            background-color: #00CED1;
+        }
+        body
+        {
+            background-color:;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top navbar-shadow">
+    <a class="navbar-brand" style="color:black; margin:2px 0px 2px 20px"><strong>Blood Donation Management System</strong> </a>
+    <a class="nav-item nav-link active" href="/donor_view/" style="color:black;margin:2px 0px 2px 30px">Dashboarad</a>
+    <a href="#" class="nav-item nav-link active" style="color:black;margin:2px 0px 2px 30px">Hello <strong>{{request.user}}</strong></a>
+    <a class="btn nav-btn btn-danger active " href="/logout/" style="color:black;margin:2px 0px 2px 400px">Logout</a>
+</nav><br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+           <div class="col-md-8" >
+               <div class="container-fluid" style="background-color: #1111"><br>
+                   <h4 class="text-center"><strong>{{user}}</strong></h4><br>
+                   <div class="row">
+                        <div class="col-md-6">
+                        <p><strong>Status : </strong>
+                        {% if donor_profile.ready_to_donate %}
+                        <a href="/change_status/" class="btn btn-success"  font-size: 23px;>Ready To Donate</a>
+                        {% else %}
+                        <a href="/change_status/" class="btn btn-danger"  font-size: 20px;>Not Ready To Donate</a>
+                        {% endif %}
+                        </p><br>
+                    
+                        <p> <strong>Fullname : </strong>{{user.get_full_name}}</p>
+                        <p><strong>Blood Group : </strong>{{donor_profile.blood_group}}</p>
+                        <p><strong>Last Donate : </strong>{{donor_profile.last_donate}}</p>
+                        <p><strong>Email :  </strong>{{user.email}}</p>
+                        <p><strong>Phone :  </strong>{{donor_profile.phone}}</p>
+                        <p><strong>Gender :  </strong>{{donor_profile.gender}}</p>
+                        <p><strong>Date of Birth : </strong>{{donor_profile.date_of_birth}}</p>
+                        <p><strong>Division : </strong> {{donor_profile.state}}</p>
+                        <p><strong>District : </strong> {{donor_profile.city}}</p>
+                        <p><strong>Address : </strong> {{donor_profile.address}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><img src="{{donor_profile.image.url}}" alt="" class="img-responsive rounded" style="max-width: 100px;max-height: 120;margin:-10px 0px 0px 180px"></p> 
+                        </div>
+                    </div>
+                </div>
+                <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #333">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/donor_edit_profile/" class="btn btn-info navbar-btn" style="color:black">Edit Profile</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div><br><br>
+
+</body>
+</html>

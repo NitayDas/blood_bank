@@ -8,14 +8,27 @@ class BloodGroup(models.Model):
         return self.name
 
 class RequestBlood(models.Model):
+    patient_id = models.IntegerField(default=0)
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=20)
-    state = models.CharField(max_length=200, blank=True)
     city = models.CharField(max_length=300, blank=True)
     address = models.CharField(max_length=500, blank=True)
     blood_group = models.ForeignKey(BloodGroup, on_delete=models.CASCADE)
     date = models.CharField(max_length=100, blank=True)
+    status=models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.name
+    
+class Donate_Blood(models.Model):
+    donor_id = models.IntegerField(default = 0 )
+    name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=20)
+    address = models.CharField(max_length=500, blank=True)
+    blood_group = models.ForeignKey(BloodGroup, on_delete=models.CASCADE)
+    date = models.CharField(max_length=100, blank=True)
+    status=models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
@@ -42,6 +55,7 @@ class Donor(models.Model):
     state = models.CharField(max_length=100)
     address = models.TextField(max_length=500, default="")
     blood_group = models.ForeignKey(BloodGroup, on_delete=models.CASCADE)
+    last_donate = models.CharField(max_length=100, blank=True)
     gender = models.CharField(max_length=10)
     image = models.ImageField(upload_to="")
     ready_to_donate = models.BooleanField(default=True)

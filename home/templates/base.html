@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     {% comment %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -28,45 +28,9 @@
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="container w-75">
-            <div class="navbar-nav">
-                {% if request.user.is_authenticated %}
-                <a class="nav-item nav-link active" href="/profile/" style="color:black">Profile</a>
-                <a class="nav-item nav-link active" href="/edit_profile/" style="color:black">Edit Profile</a>
-                <a class="nav-item nav-link active" href="/see_all_request/" style="color:black">See All Request</a>
-                <a class="btn nav-btn btn-danger active " href="/logout/" style="color:black">Logout</a>
-                {% else %}
-                <a class="nav-item nav-link active" href="/" style="color:black">All Donors</a>
-                <a class="nav-item nav-link active" href="/request_blood/" style="color:black">Request For Blood</a>
-                <a class="nav-item nav-link active" href="/see_all_request/" style="color:black">See All Request</a>
-                
-                <label class="nav-item nav-link active" style="color:black" for="register">Register</label>
-                <select id="register">
-                    <option value="">Pick an option</option>
-                    <option value="/become_donor/">As a donor</option>
-                    <option value="/become_patient/">As a Patient</option>
-                </select>
-                
-                <script>
-                    document.getElementById("register").onchange = function() {
-                        if (this.selectedIndex!==0) {
-                            window.location.href = this.value;
-                        }     
-                    };
-                </script>
-                
-                <a class="nav-item nav-link active" href="/login/" style="color:black">Login</a>
-                {% endif %}
-            </div>
-            {% if request.user.is_authenticated %}
-            <a href="#" class="nav-item nav-link active" style="color: white;">Welcome {{request.user}}</a>
-            {% endif %}
-        </div>
-        </div>
     </nav><br>
 
-        {% block body %}
+       {% block body %}
         {% endblock %}
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -78,6 +42,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+    
 
         {% block js %}
         {% endblock %}

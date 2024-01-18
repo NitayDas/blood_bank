@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %} Blood Donation {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+
+<div class-"container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-5 shadow-lg bg-light text-center">
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+             {% endif %}
+        </div>
+    </div>
+ </div><br>
+
+<div class="container shadow-lg bg-tertiary">
+{% if donors %}
+<h3 class="text-center">All Donors</h3><br>
+<table class="table table-sm table-bordered">
+  <tr class="table-secondary">
+    <th>Name</th>
+    <th>Blood Group</th>
+    <th>State | City</th>
+    <th>Last Donate</th>
+    <th>Status</th> 
+    <th>Profile</th>
+    <th>Remove Account</th>
+  </tr>
+  {% for i in donors %}
+      <tr class="table-success">
+        <td>{{i.donor.get_full_name}}</td>
+        <td>{{i.blood_group}}</td>
+        <td>{{i.state}} | {{i.city}}</td>
+        <td>{{i.last_donate}}</td>
+        {% if i.ready_to_donate %}
+        <td style="color:green">Ready To Donate</td>
+        {% else %}
+        <td style="color:red">Not Ready To Donate</td>
+        {% endif %}
+        <td class="text-center"><a href="/donors_details/{{i.id}}/" class="btn btn-sm btn-outline-secondary">View</a></td>
+        <td class="text-center"><a href="{% url 'delete_donor' id=i.id %}" class="btn btn-danger"> Delete </a></td> 
+  {% endfor %}
+</table><br><br>
+{% else %}
+<h2>No Donor Available</h2>
+{% endif %}
+</div>
+{% endblock %}

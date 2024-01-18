@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block title %} Blood Request {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+
+<div class="container">
+{% if request.user.is_superuser %}
+{% if requests %}
+<div class="container-fluid shadow-lg">
+<h3 class="text-center" style="color:green;"><strong>All Blood Requests</strong></h3>
+<br>
+<table class="table table-sm table-bordered">
+  <tr class="table-danger">
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Email</th>
+    <th>Blood Group</th>
+    <th>Need Date</th>
+    <th>State | City</th>
+    <th>status</th>
+  </tr>
+  {% for i in requests %}
+    <tr>
+      <td>{{i.name}}</td>
+      <td>{{i.phone}}</td>
+      <td>{{i.email}}</td>
+      <td>{{i.blood_group}}</td>
+      <td>{{i.date}}</td>
+      <td>{{i.state}} | {{i.city}}</td>
+      <td>
+      {% if i.status == 0 %}
+      <a href="{% url 'patient_blood_approve' request_id=i.id %}" class="btn btn-info" >Approve</a>
+      <a href="{% url 'patient_blood_disapprove' request_id=i.id %}" class="btn btn-danger" >Decline</a>
+      {% endif %}
+    
+      {% if i.status == 1 %}
+      <button class="btn btn-success" disabled="disabled" data-toggle="modal" data-target="#reply_modal">Approved</button>
+      {% elif i.status == 2 %}
+      <button class="btn btn-danger" disabled="disabled" data-toggle="modal" data-target="#reply_modal">Disapproved</button>
+      {% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+</table>
+{% else %}
+<h2>No Blood Request Available</h2>
+{% endif %}
+
+{% comment %} for Donor View {% endcomment %}
+{% else %}
+{% if requests %}
+<div class="container-fluid shadow-lg">
+<h3 class="text-center" style="color:green;"><strong>All Blood Requests</strong></h3>
+<br>
+<table class="table table-sm table-bordered">
+  <tr class="table-danger">
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Email</th>
+    <th>Blood Group</th>
+    <th>Need Date</th>
+    <th>State | City</th>
+    <th>status</th>
+  </tr>
+  {% for i in requests %}
+  {% if i.status != 2 %}
+    <tr>
+      <td>{{i.name}}</td>
+      <td>{{i.phone}}</td>
+      <td>{{i.email}}</td>
+      <td>{{i.blood_group}}</td>
+      <td>{{i.date}}</td>
+      <td>{{i.state}} | {{i.city}}</td>
+      <td>
+      
+      {% if i.status == 0 %}
+      <button class="btn btn-warning" disabled="disabled" data-toggle="modal" data-target="#reply_modal">Pending</button>
+      {% elif i.status == 1 %}
+      <button class="btn btn-success" disabled="disabled" data-toggle="modal" data-target="#reply_modal">Approved</button>
+      {% endif %}
+      </td>
+    </tr>
+    {% endif %}
+   {% endfor %}
+</table>
+{% else %}
+<h2>No Blood Request Available</h2>
+{% endif %}
+{% endif %}
+</div>
+</div>
+{% endblock %}

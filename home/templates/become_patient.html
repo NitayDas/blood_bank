@@ -1,56 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <title>Document</title>
-</head>
-<body>
-    
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-7">
-      <form method="post" action="">{% csrf_token %}
-        <label for="username" style="font-weight: bold;">Username:</label>
-        <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username" required><br>
-        <label for="email" style="font-weight: bold;">email:</label>
-        <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email" required><br>
-        <label for="first_name" style="font-weight: bold;">First Name:</label>
-        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter FirstName" required><br>
-        <label for="last_name" style="font-weight: bold;">Last Name:</label>
-        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter LastName" required><br>
 
-        <label><i style="font-weight: bold;">Disease</i></label>
-        <input type="text" class="form-control" name="disease" id="disease" placeholder="Enter Disease" required><br>
+{% extends 'base.html' %}
+{% block title %} Blood Donation {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<div class="container-fluid shadow-lg">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 shadow-lg bg-light">
+            <div class="container"><br>
+                <h4><strong>Register As Patient</strong></h4>
+                <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                 <div class="row mt-4">
+                 <div class="form-group col-md-12">
+                    <label><i style="font-weight: bold;">Username</i></label>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username" required>
+                </div>
+            </div>
+            
+            <div class="row mt-1">
+                <div class="form-group col-md-6">
+                    <label><i style="font-weight: bold;">First Name</i></label>
+                    <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter First Name" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label><i style="font-weight: bold;">Last Name</i></label>
+                    <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter Last Name" required>
+                </div>
+            </div>
+            
+            <div class="row mt-1">
+                <div class="form-group col-md-6">
+                    <label><i style="font-weight: bold;">Email ID</i></label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email ID" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label><i style="font-weight: bold;">Contact Number</i></label>
+                    <input type="tel" class="form-control" name="phone" id="phone" placeholder="Enter Contact Number" required>
+                </div>
+            </div>
+            
+            <label><i style="font-weight: bold;">Disease</i></label>
+            <input type="text" class="form-control" name="disease" id="disease" placeholder="Enter Disease" required><br>
 
-        <label><i style="font-weight: bold;">Contact Number</i></label>
-        <input type="phone" class="form-control" name="phone" id="phone" placeholder="Enter Contact Number" required><br>
-
-        <label><i style="font-weight: bold;">Division</i></label>
-        <input type="text" class="form-control" name="division" id="state" placeholder="Enter Division" required>
-
-        <label><i style="font-weight: bold;">Distric</i></label>
-        <input type="text" class="form-control" name="dist" id="dist" placeholder="Enter Distric" required><br>
+          <div class="row mt-1">
+             <div class="form-group col-md-6">
+                <label><i style="font-weight: bold;">Division</i></label>
+                <input type="text" class="form-control" name="division" id="state" placeholder="Enter Division" required>
+             </div>
+              <div class="form-group col-md-6">
+                <label><i style="font-weight: bold;">Distric</i></label>
+                <input type="text" class="form-control" name="dist" id="dist" placeholder="Enter Distric" required><br>
+              </div>
+            </div>
    
         <label><i style="font-weight: bold;">Address</i></label>
         <input type="text" class="form-control" id="address" name="address"  placeholder="Enter Address" required></input>
      
-      <label><i style="font-weight: bold;">Gender</i></label>
-      <div style="border: 1px solid lightgrey; padding: 5px; border-radius: 6px;">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
-          <label class="form-check-label">Male</label>
-        </div>
-       <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
-          <label class="form-check-label">Female</label>
-        </div>
-      </div>
-    
-      <div class="form-group col-md-6">
+      <div class="row mt-1">
+          <div class="form-group col-md-6">
+              <label><i style="font-weight: bold;">Gender</i></label>
+              <div style="border: 1px solid lightgrey; padding: 5px; border-radius: 6px;">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
+                  <label class="form-check-label">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+                  <label class="form-check-label">Female</label>
+                </div>
+              </div>
+          </div>
+       <div class="form-group col-md-6">
           <label><i style="font-weight: bold;">Blood Group</i></label>
           <select class="form-control" name="blood_group" required>
               <option>A+</option>
@@ -62,7 +83,8 @@
               <option>AB+</option>
               <option>AB-</option>
               </select>
-      </div>
+         </div>
+       </div>
   
   
       {% comment %} <label><i style="font-weight: bold;">Profile Photo</i></label>
@@ -70,18 +92,25 @@
 
       <label><i style="font-weight: bold;">Date Of Birth</i></label>
       <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required><br>
- 
-      <label for="password" style="font-weight: bold;">password:</label>
-      <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" required><br>
-
-      <label for="confirm_password">Confirm Password:</label>
-      <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Enter Confirm Password" required><br>
-  
-      <button type="submit" class="btn btn-primary">Submit</button>
-   </form>
-  </div> 
- </div>
+      
+      <div class="row mt-1">
+        <div class="form-group col-md-6">
+            <label for="password" style="font-weight: bold;">password:</label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" required><br>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="confirm_password" style="font-weight: bold;">Confirm Password:</label>
+            <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Enter Confirm Password" required><br>
+        </div>
+      </div>
+        
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </form><br><br>
+            </div>
+        </div>
+    </div>
 </div>
-    
-</body>
-</html>
+
+{% endblock %}
+
