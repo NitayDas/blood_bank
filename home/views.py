@@ -172,6 +172,7 @@ def donor_edit_profile(request):
         city = request.POST['city']
         address = request.POST['address']
         last_donate = request.POST['last_donate']
+        image = request.FILES['image']
 
         donor_profile.donor.email = email
         donor_profile.phone = phone
@@ -179,15 +180,16 @@ def donor_edit_profile(request):
         donor_profile.city = city
         donor_profile.address = address
         donor_profile.last_donate = last_donate
+        donor_profile.image = image
         donor_profile.save()
         donor_profile.donor.save()
 
-        try:
-            image = request.FILES['image']
-            donor_profile.image = image
-            donor_profile.save()
-        except:
-            pass
+        # try:
+        #     image = request.FILES['image']
+        #     donor_profile.image = image
+        #     donor_profile.save()
+        # except:
+        #     pass
         alert = True
         return render(request, "donor_edit_profile.html", {'alert':alert})
     return render(request, "donor_edit_profile.html", {'donor_profile':donor_profile})

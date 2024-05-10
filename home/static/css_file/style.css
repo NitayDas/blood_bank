@@ -42,9 +42,18 @@
   width:100%;
 }
 
+.sidebar_menu .menu ul{
+  list-style-type: none; 
+  padding: 0;
+}
+
 .sidebar_menu .menu li{
   margin-top: 6px;
   padding: 14px 20px;
+}
+
+.sidebar_menu .menu ul li:before {
+  content: none; /* Remove default bullet point */
 }
 
 .sidebar_menu .menu i{
