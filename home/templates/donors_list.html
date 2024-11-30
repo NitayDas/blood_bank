@@ -24,6 +24,7 @@
         <td>{{i.blood_group}}</td>
         <td>{{i.state}} | {{i.city}}</td>
         <td>{{i.last_donate}}</td>
+        <td>{{i.last_donate}}</td>
         <td>Ready To Donate</td>
         {% if request.user.is_authenticated %}
         <td><a href="/donors_details/{{i.id}}/" class="btn btn-sm btn-outline-secondary">View</a></td> 
@@ -34,10 +35,12 @@
         <td>{{i.donor.get_full_name}}</td>
         <td>{{i.blood_group}}</td>
         <td>{{i.state}} | {{i.city}}</td>
+        <td>{{i.state}} | {{i.city}}</td>
         <td>{{i.last_donate}}</td>
         <td>Not Ready To Donate</td>
         {% if request.user.is_authenticated %}
         <td><a href="" class="btn btn-sm btn-outline-secondary">View</a></td>
+        {% endif %}
         {% endif %}
       </tr>
     {% endif %}

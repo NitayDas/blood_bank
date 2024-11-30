@@ -42,11 +42,26 @@
   width:100%;
 }
 
+<<<<<<< HEAD
+=======
+.sidebar_menu .menu ul{
+  list-style-type: none; 
+  padding: 0;
+}
+
+>>>>>>> cca403175b3542ff18ac4ccea89c4e40aa0ff9e3
 .sidebar_menu .menu li{
   margin-top: 6px;
   padding: 14px 20px;
 }
 
+<<<<<<< HEAD
+=======
+.sidebar_menu .menu ul li:before {
+  content: none; /* Remove default bullet point */
+}
+
+>>>>>>> cca403175b3542ff18ac4ccea89c4e40aa0ff9e3
 .sidebar_menu .menu i{
   color: #06addc;
   font-size: 20px;

@@ -1,4 +1,3 @@
-{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
@@ -32,6 +31,7 @@
               <h5 class="card-text">Blood Group:<strong>{{i.name}}</strong></h5>
               <h5 class="card-text">Total :<strong>{{i.total}}</strong></h5>
               <div class="d-flex justify-content-between align-items-center">
+              <a href="/donors_list/{{i.id}}/" class="btn btn-sm btn-info">View All Donors</a>
               <a href="/donors_list/{{i.id}}/" class="btn btn-sm btn-info">View All Donors</a>
               </div>
               </div>

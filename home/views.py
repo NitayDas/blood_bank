@@ -22,22 +22,20 @@ def donors_details(request, myid):
     return render(request, "donors_details.html", {'details':details})
 
 def request_blood(request):
+    user = request.user
+    patient=user.patient
+    full_name = f"{user.first_name} {user.last_name}"
+    
     if request.method == "POST":
-        name = request.POST['name']
-        email = request.POST['email']
-        phone = request.POST['phone']
-        state = request.POST['state']
-        city = request.POST['city']
-        address = request.POST['address']
         blood_group = request.POST['blood_group']
         date = request.POST['date']
-        blood_requests = RequestBlood.objects.create(name=name, email=email, phone=phone, state=state, city=city, address=address, blood_group=BloodGroup.objects.get(name=blood_group), date=date)
+        blood_requests = RequestBlood.objects.create(patient_id=request.user.id, name=full_name, email=user.email, phone=patient.phone, city=patient.dist, address=patient.address, blood_group=BloodGroup.objects.get(name=blood_group), date=date)
         blood_requests.save()
-        return redirect("/patient_view")
+        return render(request, "index.html")
     return render(request, "request_blood.html")
 
 def see_all_request(request):
-    requests = RequestBlood.objects.all()
+    requests = RequestBlood.objects.filter(patient_id=request.user.id)
     return render(request, "see_all_request.html", {'requests':requests})
 
 def become_patient(request):
@@ -157,12 +155,7 @@ def Patient_view(request):
 @login_required(login_url = '/donor_login')
 def Donor_profile(request):
     donor_profile = Donor.objects.get(donor=request.user)
-    return render(request, "donor_profile.html", {'donor_profile':donor_profile})
-
-@login_required(login_url = '/patinet_login')
-def Patient_profile(request):
-    patient_profile = Patient.objects.get(patient=request.user)
-    return render(request, "patient_profile.html", {'patient_profile':patient_profile})
+    return render(request, "profile.html", {'donor_profile':donor_profile})
 
 @login_required(login_url = '/login')
 def donor_edit_profile(request):
@@ -173,23 +166,21 @@ def donor_edit_profile(request):
         state = request.POST['state']
         city = request.POST['city']
         address = request.POST['address']
-        last_donate = request.POST['last_donate']
 
         donor_profile.donor.email = email
         donor_profile.phone = phone
         donor_profile.state = state
         donor_profile.city = city
         donor_profile.address = address
-        donor_profile.last_donate = last_donate
         donor_profile.save()
         donor_profile.donor.save()
 
-        try:
-            image = request.FILES['image']
-            donor_profile.image = image
-            donor_profile.save()
-        except:
-            pass
+        # try:
+        #     image = request.FILES['image']
+        #     donor_profile.image = image
+        #     donor_profile.save()
+        # except:
+        #     pass
         alert = True
         return render(request, "donor_edit_profile.html", {'alert':alert})
     return render(request, "donor_edit_profile.html", {'donor_profile':donor_profile})
