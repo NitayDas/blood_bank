@@ -1,0 +1,34 @@
+{% extends 'base4.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container my-4">
+      <div class-"row">
+        <div class="col-md-0"></div>
+        <div class="col-md-12">
+        <div class="album py-5" style="background:linear-gradient(135deg, #ffffff, #a3d2ee);">
+            <h4 class="text-center"><strong>Available Donors According To Blood Group</strong></h4><br>
+            <div class="container">
+                <div class="row">
+                 {% for i in all_group %}
+                 <div class="col-md-4">
+                    <div class="card mb-4 shadow-lg border-success">
+                    <div class="card-body">
+                    <h5 class="card-text">Blood Group:<strong>{{i.name}}</strong></h5>
+                    <h5 class="card-text">Total :<strong>{{i.total}}</strong></h5>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <a href="/donors_list/{{i.id}}/" class="btn btn-sm btn-info">View All Donors</a>
+                    </div>
+                    </div>
+                    </div>
+                 </div>
+                {% endfor %}
+               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

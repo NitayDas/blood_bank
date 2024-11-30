@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class-"container-fluid mt-4">
+   <div class="row">
+       <div class="col-md-3"></div>
+       <div class="col-md-5 shadow-lg bg-light text-center">
+           {% if messages %}
+               {% for message in messages %}
+                   {{ message }}
+               {% endfor %}
+            {% endif %}
+       </div>
+   </div>
+</div><br>
+
+
+<div class="container-fluid my-4">
+  <div class="row">
+     <div class="col-md-3"></div>
+     <div class="col-md-5 shadow-lg bg-light">
+        <p class="text-center" style="font-size:24px;">Patient Login..</p>
+        <form method="POST"> {% csrf_token %}
+         <div class="container mt-5">
+            <div class="mb-3">
+                <label for="username" class="form-label"><i style="font-weight:bold">Username</i></label>
+                <input type="text" class="form-control shadow-lg" id="username" name="username" placeholder="Enter Username">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label"><i style="font-weight:bold">Password</i></label>
+               <input type="password" class="form-control shadow-lg " id="password" name="password" placeholder="Enter Password">
+            </div>
+            <br>
+            <input type="submit" value="Submit" class="btn btn-primary" style="color: white; font-size: larger; width: 8rem;">
+          </div><br>
+        </form>
+     </div>
+    </div>
+</div>
+
+{% endblock %}
+

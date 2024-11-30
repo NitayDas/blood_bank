@@ -4,6 +4,8 @@ from . models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
+from .forms import EditProfileForm
+from django.contrib import messages
 
 
 def index(request):
@@ -31,7 +33,7 @@ def request_blood(request):
         date = request.POST['date']
         blood_requests = RequestBlood.objects.create(name=name, email=email, phone=phone, state=state, city=city, address=address, blood_group=BloodGroup.objects.get(name=blood_group), date=date)
         blood_requests.save()
-        return render(request, "index.html")
+        return redirect("/patient_view")
     return render(request, "request_blood.html")
 
 def see_all_request(request):
@@ -63,7 +65,8 @@ def become_patient(request):
         patients=Patient.objects.create(patient=user, phone=phone, date_of_birth=date_of_birth, division=division, dist=dist, address=address, blood_group=BloodGroup.objects.get(name=blood_group), disease=disease, gender=gender)
         user.save()
         patients.save()
-        return render(request,"base.html") 
+        messages.success(request, 'Sign-up successful! You can now log in.')
+        return redirect('/patient_login')
 
     return render(request, "become_patient.html")
 
@@ -92,37 +95,77 @@ def become_donor(request):
         donors = Donor.objects.create(donor=user, phone=phone, state=state, city=city, address=address, gender=gender, blood_group=BloodGroup.objects.get(name=blood_group), date_of_birth=date,image=image)
         user.save()
         donors.save()
-        return render(request, "base.html")
+        messages.success(request, 'Sign-up successful! You can now log in.')
+        return redirect('/donor_login')
+    
     return render(request, "become_donor.html")
 
-def Login(request):
-    if request.user.is_authenticated:
-        return redirect("/")
-    else:
-        if request.method == "POST":
-            username = request.POST['username']
-            password = request.POST['password']
-            user = authenticate(username=username, password=password)
+def Donor_Login(request):
+    
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
 
-            if user is not None:
-                login(request, user)
-                return redirect("/profile")
-            else:
-                thank = True
-                return render(request, "user_login.html", {"thank":thank})
-    return render(request, "login.html")
+        if user is not None:
+            login(request, user)
+            return redirect("/donor_view")
+        else:
+            messages.success(request, 'invalid Password or Username')
+            return redirect( "/donor_login")
+    return render(request, "donor_login.html")
+
+
+def Patient_Login(request):
+   
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect("/patient_view")
+        else:
+            messages.success(request, 'invalid Password or Username')
+            return redirect( "/patient_login")
+    return render(request, "patient_login.html")
 
 def Logout(request):
     logout(request)
     return redirect('/')
 
-@login_required(login_url = '/login')
-def profile(request):
+def Donor_view(request):
+    try:
+        donor = Donor.objects.get(donor=request.user)
+        return render(request, 'donor_view.html')
+    
+    except Donor.DoesNotExist:
+        messages.success(request, 'Donor profile does not exist !')
+        return redirect('/donor_login') 
+    
+def Patient_view(request):
+    try:
+        all_group = BloodGroup.objects.annotate(total=Count('donor'))
+        patient = Patient.objects.get(patient=request.user)
+        return render(request,"patient_view.html",{'all_group': all_group})
+    
+    except Patient.DoesNotExist:
+        messages.success(request, 'Patient profile does not exist !')
+        return redirect('/patient_login')
+   
+@login_required(login_url = '/donor_login')
+def Donor_profile(request):
     donor_profile = Donor.objects.get(donor=request.user)
-    return render(request, "profile.html", {'donor_profile':donor_profile})
+    return render(request, "donor_profile.html", {'donor_profile':donor_profile})
+
+@login_required(login_url = '/patinet_login')
+def Patient_profile(request):
+    patient_profile = Patient.objects.get(patient=request.user)
+    return render(request, "patient_profile.html", {'patient_profile':patient_profile})
 
 @login_required(login_url = '/login')
-def edit_profile(request):
+def donor_edit_profile(request):
     donor_profile = Donor.objects.get(donor=request.user)
     if request.method == "POST":
         email = request.POST['email']
@@ -130,12 +173,14 @@ def edit_profile(request):
         state = request.POST['state']
         city = request.POST['city']
         address = request.POST['address']
+        last_donate = request.POST['last_donate']
 
         donor_profile.donor.email = email
         donor_profile.phone = phone
         donor_profile.state = state
         donor_profile.city = city
         donor_profile.address = address
+        donor_profile.last_donate = last_donate
         donor_profile.save()
         donor_profile.donor.save()
 
@@ -146,10 +191,22 @@ def edit_profile(request):
         except:
             pass
         alert = True
-        return render(request, "edit_profile.html", {'alert':alert})
-    return render(request, "edit_profile.html", {'donor_profile':donor_profile})
+        return render(request, "donor_edit_profile.html", {'alert':alert})
+    return render(request, "donor_edit_profile.html", {'donor_profile':donor_profile})
 
-@login_required(login_url = '/login')
+def patient_edit_profile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user.patient)
+        if form.is_valid():
+            form.save()
+            return redirect('patient_profile')  # Change 'profile' to the URL of your profile page
+    else:
+        form = EditProfileForm(instance=request.user.patient)
+
+    return render(request, 'patient_edit_profile.html', {'form': form})
+
+
+@login_required(login_url = '/donor_login')
 def change_status(request):
     donor_profile = Donor.objects.get(donor=request.user)
     if donor_profile.ready_to_donate:
@@ -158,4 +215,36 @@ def change_status(request):
     else:
         donor_profile.ready_to_donate = True
         donor_profile.save()
-    return redirect('/profile')
+    return redirect('/donor_profile')
+
+def donate_blood(request):
+    user = request.user
+    full_name = f"{user.first_name} {user.last_name}"
+
+    if request.method == "POST":
+        phone = request.POST['phone']
+        address = request.POST['address']
+        blood_group = request.POST['blood_group']
+        date = request.POST['date']
+        donate_blood = Donate_Blood.objects.create(donor_id = request.user.id ,name=full_name, phone=phone, address=address, blood_group=BloodGroup.objects.get(name=blood_group), date=date)
+        donate_blood.save()
+        
+        messages.success(request, 'Donation Request Sent Successfully.')
+        return redirect("/donor_view")
+    
+    return render(request, "donate_blood.html")
+
+def donate_history(request):
+    requests = Donate_Blood.objects.all()
+    user_request = Donate_Blood.objects.filter(donor_id=request.user.id)
+    
+    if request.user.is_superuser:
+        return render(request, "donate_history.html", {'requests':requests})
+    else:
+        return render(request, "donate_history.html", {'requests':user_request})
+
+def about_us(request):
+   return render(request,"about.html")
+
+
+

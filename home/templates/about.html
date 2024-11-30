@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+ {% load static %}
+   
+ {% block content %}
+    
+   <div class="px-4">
+    <br><br><section class="section hero" id="home" aria-label="hero">
+        <div class="container-fluid">
+          <div class="hero-content">
+            <img src="{% static 'image/blood-icon.png' %}" alt="ICON" width="70" height="70"> 
+            <h1 class="h1 hero-title">Our Vision</h1>
+            <p class="hero-text">
+              our vision is to create a centralized hub that connects blood donors and recipients in need. We envision a future where finding a suitable blood donor
+              is no longer a time-consuming and challenging task. Instead, it becomes a simple, efficient, and accessible process that can save lives during critical moments. Also we tried
+              our best in creating a user-friendly interface for this site so normal users can navigate and use our services easly.
+            </p>
+          </div>
+        </div>
+      </section><br><br>
+      <!--Hero THIRD-->
+
+    <section class="section hero" id="home" aria-label="hero">    
+    <div class="container-fluid">
+    <div class="row">
+         
+      <div class="col-md-6">
+          <div class="hero-content">
+            <p class="hero-text">
+                <img src="{% static 'image/about4.png' %}" width="200" height="400" alt="hero banner" class="w-100">             
+            </p>
+          </div>
+        </div>
+
+         <div class="col-md-6">
+          <figure class="hero-content">
+            <h1 class="h1 hero-title">How We Work</h1>
+            <p style="hero-text">The process is straightforward: donors register their details with us, providing essential information about their blood type,
+              contact details, and location. By creating a comprehensive database of donors, we can quickly match them with recipients searching for compatible donors.<br><br>
+              For recipients seeking blood, our user-friendly platform allows them to enter their requirements and search for potential matches within the donor database.
+              The matching process is efficient and designed to connect recipients with suitable donors promptly.<br>
+            Also we provide a simple response back utility which users can enter their email address and we will directly respond from our side. Also users can pre-book blood for 
+          an upcoming date and we will arrange blood directly and reach you. We also have an emergency ambulance service you can call any time.</p>
+          </figure>
+        </div>
+        
+    </div>
+    </div>
+   </section><br><br>
+
+      <!--Hero FOURTH-->
+    <section class="section hero" id="home" aria-label="hero">
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+          <div class="hero-content">
+            <h1 class="h1 hero-title">24x7 Support and Service</h1>
+            <p class="hero-text">
+            We take pride in offering round-the-clock service and support and service including the ambulance services. Our team is dedicated to providing prompt assistance and addressing any concerns or queries you may have.
+            Your well-being and satisfaction are our top priorities.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <figure class="hero-banner">
+              <img src="{% static 'image/about5.png' %}" width="200" height="400" alt="hero banner" class="w-100">
+          </figure>
+      </div>
+        
+    </div>
+    </div>
+   </section><br><br>
+
+
+        <hr style="margin-left: 3cm; margin-right: 3cm;">
+        
+        <div class="row" style="overflow: hidden; padding: 1cm;">
+          <!-- First Column -->
+          <div class="col-md-4 shadow-lg bg-blue p-2">
+            <h1 style="color: var(--oxford-blue-1); font-size: var(--fs-1); font-weight: bold;" >Join the Blood Bank</h1>
+            <br>
+            <p style="font-size: 17px;">
+              We invite you to join our growing community of blood donors and recipients. By becoming a part of Blood Bank,
+              you contribute to a noble cause and play a vital role in saving lives. Your selfless act of blood donation can make a significant impact and bring hope to those in need.
+            </p>
+          </div>
+        
+          <!-- Second Column -->
+          <div class="col-md-4 shadow-lg bg-blue p-2">
+            <h1 style="color: var(--oxford-blue-1); font-size: var(--fs-1); font-weight: bold;">Let's Create a Better Tomorrow</h1>
+            <br>
+            <p style="font-size: 17px;">
+              we firmly believe that when individuals come together with a common purpose, remarkable things can happen. With your support and participation,
+              we can build a future where blood donation is readily available to those who need it the most. Together, we can create a better tomorrow and foster a community of caring and compassion.
+            </p>
+          </div>
+        
+          <!-- Third Column -->
+          <div class="col-md-4 shadow-lg bg-blue p-2">
+            <h1 style="color: var(--oxford-blue-1); font-size: var(--fs-1);font-weight: bold;">Raise a fund if you can</h1>
+            <br>
+            <p style="font-size: 17px;">
+              Ours is a service group of  dedicated persons without any intention of making profits. But inorder to run and maintain our services we have expenses, currently we are running
+              our services with the contribution of our own team and some kind personalities and sponsors. You can donate us a fund and join us to run our services seamlessly.
+              You can call or message at <a href="01642530621" class="footer-link" style="display: inline; color: #216aca;" onmouseover="this.style.color='#03d9ff'" onmouseout="this.style.color='#216aca'">01642530621</a>.
+            </p>
+          </div>
+        </div> 
+      </section>
+
+</div>
+
+
+ 
+
+  <!--custom js link-->
+  <script src="./assets/js/script.js" defer></script>
+  <!--ionicon link-->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  {% endblock %}
