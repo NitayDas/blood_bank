@@ -25,9 +25,9 @@
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top navbar-shadow">
         <a class="navbar-brand" style="color:black; margin:2px 0px 2px 20px"><strong>Blood Donation Management System</strong> </a>
         {% if request.user.is_superuser %}
-        <a class="nav-item nav-link active" href="/admin_view/" style="margin: 5px 0 5px 60px">Dashboard</a> 
+        <a class="nav-item nav-link active" href="/admin_view/" style="margin: 5px 0 5px 60px; color:black">Dashboard</a> 
         {% else %}
-        <a class="nav-item nav-link active" href="/patient_view/" style="margin: 5px 0 5px 60px">Dashboard</a>
+        <a class="nav-item nav-link active" href="/patient_view/" style="margin: 5px 0 5px 60px; color:black">Dashboard</a>
         {% endif %} 
         <a href="#" class="nav-item nav-link active" style="color:black;margin:2px 0px 2px 30px">Hello <strong>{{request.user}}</strong></a>
         <a class="btn nav-btn btn-danger active " href="/logout/" style="color:black;margin:2px 0px 2px 400px">Logout</a>

@@ -8,7 +8,6 @@ class BloodGroup(models.Model):
         return self.name
 
 class RequestBlood(models.Model):
-    patient_id = models.IntegerField(default=0)
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=20)
@@ -17,6 +16,7 @@ class RequestBlood(models.Model):
     blood_group = models.ForeignKey(BloodGroup, on_delete=models.CASCADE)
     date = models.CharField(max_length=100, blank=True)
     status=models.IntegerField(default=0)
+    # state = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -62,5 +62,3 @@ class Donor(models.Model):
 
     def __str__(self):
         return str(self.blood_group)
-    
-    

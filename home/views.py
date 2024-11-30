@@ -29,14 +29,20 @@ def request_blood(request):
     if request.method == "POST":
         blood_group = request.POST['blood_group']
         date = request.POST['date']
-        blood_requests = RequestBlood.objects.create(patient_id=request.user.id, name=full_name, email=user.email, phone=patient.phone, city=patient.dist, address=patient.address, blood_group=BloodGroup.objects.get(name=blood_group), date=date)
+        address = request.POST['address']
+        blood_requests = RequestBlood.objects.create( name=full_name, email=user.email, phone=patient.phone, city=patient.dist, address=address, blood_group=BloodGroup.objects.get(name=blood_group), date=date)
         blood_requests.save()
         return render(request, "index.html")
     return render(request, "request_blood.html")
 
 def see_all_request(request):
-    requests = RequestBlood.objects.filter(patient_id=request.user.id)
+    requests = RequestBlood.objects.all()
     return render(request, "see_all_request.html", {'requests':requests})
+
+def status_check(request):
+    user = request.user
+    requests = RequestBlood.objects.filter(email = user.email)
+    return render(request, "status_check.html", {'requests':requests})
 
 def become_patient(request):
     if request.method=="POST":   
@@ -155,7 +161,12 @@ def Patient_view(request):
 @login_required(login_url = '/donor_login')
 def Donor_profile(request):
     donor_profile = Donor.objects.get(donor=request.user)
-    return render(request, "profile.html", {'donor_profile':donor_profile})
+    return render(request, "donor_profile.html", {'donor_profile':donor_profile})
+
+@login_required(login_url = '/donor_login')
+def Patient_profile(request):
+    patient_profile = Patient.objects.get(patient=request.user)
+    return render(request, "patient_profile.html", {'patient_profile':patient_profile})
 
 @login_required(login_url = '/login')
 def donor_edit_profile(request):

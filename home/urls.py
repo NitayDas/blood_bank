@@ -41,6 +41,10 @@ urlpatterns = [
     
     path('donate_history/', views.donate_history, name='donate_history'),
     
+    path('status_check/', views.status_check, name='status_check'),
+    
     path('about_us/', views.about_us, name='about_us'),
+    
+    
            
 ]
