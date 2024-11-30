@@ -16,8 +16,6 @@ class RequestBlood(models.Model):
     blood_group = models.ForeignKey(BloodGroup, on_delete=models.CASCADE)
     date = models.CharField(max_length=100, blank=True)
     status=models.IntegerField(default=0)
-    # state = models.CharField(max_length=100, blank=True, null=True)
-
     def __str__(self):
         return self.name
     
@@ -36,7 +34,7 @@ class Donate_Blood(models.Model):
 class Patient(models.Model):
     patient = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     date_of_birth = models.CharField(max_length=100)
-    phone = models.CharField(max_length=10)
+    phone = models.CharField(max_length=15)
     division = models.CharField(max_length=100)
     dist = models.CharField(max_length=100)
     address = models.TextField(max_length=500, default="")
@@ -50,7 +48,7 @@ class Patient(models.Model):
 class Donor(models.Model):
     donor = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     date_of_birth = models.CharField(max_length=100)
-    phone = models.CharField(max_length=10)
+    phone = models.CharField(max_length=15)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     address = models.TextField(max_length=500, default="")

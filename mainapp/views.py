@@ -29,10 +29,9 @@ def request_blood(request):
     if request.method == "POST":
         blood_group = request.POST['blood_group']
         date = request.POST['date']
-        address = request.POST['address']
-        blood_requests = RequestBlood.objects.create( name=full_name, email=user.email, phone=patient.phone, city=patient.dist, address=address, blood_group=BloodGroup.objects.get(name=blood_group), date=date)
+        blood_requests = RequestBlood.objects.create( name=full_name, email=user.email, phone=patient.phone, city=patient.dist, address=patient.address, blood_group=BloodGroup.objects.get(name=blood_group), date=date)
         blood_requests.save()
-        return render(request, "index.html")
+        return render(request, "patient_view.html")
     return render(request, "request_blood.html")
 
 def see_all_request(request):
