@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <title>{% block title %}Blood Donation Management System{% endblock %}</title>
+  <style>
+    .navbar {
+        background-color: hsl(170, 50%, 25%);
+    }
+    body {
+        background-color: #f8f9fa; /* Optional background color for the body */
+    }
+  </style>
+</head>
+
+<body class="container-fluid pt-2">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-lg">
+    <a class="navbar-brand text-center text-sm-left ml-4" href="/" style="color: white;">
+        <strong>Blood Donation Management System</strong>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="container-fluid">
+            <div class="navbar-nav mx-2">
+                <a class="nav-item nav-link active text-center text-sm-left" href="/" style="color:white;">Home</a>
+                <a class="nav-item nav-link active text-center text-sm-left" href="/about_us/" style="color:white;">About Us</a>
+                
+                <!-- Register Dropdown -->
+                <div class="form-inline my-2 my-lg-0">
+                    <label class="nav-item nav-link active mr-2" for="register" style="color: white;">Register</label>
+                    <select id="register" class="form-control form-control-sm">
+                        <option value="">Pick an option</option>
+                        <option value="/become_donor/">As a donor</option>
+                        <option value="/become_patient/">As a Patient</option>
+                    </select>
+                </div>
+                
+                <!-- Login Dropdown -->
+                <div class="form-inline my-2 my-lg-0 ml-lg-4">
+                    <label class="nav-item nav-link active mr-2" for="login" style="color: white;">Login</label>
+                    <select id="login" class="form-control form-control-sm">
+                        <option value="">Pick an option</option>
+                        <option value="/donor_login/">Donor</option>
+                        <option value="/patient_login/">Patient</option>
+                        <option value="/admin_login/">Admin</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <script>
+    document.getElementById("register").onchange = function() {
+        if (this.selectedIndex !== 0) {
+            window.location.href = this.value;
+        }
+    };
+    document.getElementById("login").onchange = function() {
+        if (this.selectedIndex !== 0) {
+            window.location.href = this.value;
+        }
+    };
+  </script>
+
+  <!-- Footer Section -->
+  <footer class="footer" style="background-color: hsl(218, 71%, 20%)">
+    <div class="footer-top section">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="container">
+             <h4><strong style="color:red">Blood</strong> <strong style="color:white">Donation Management System</strong></h4><br>
+              <p style="color: white">
+                We are passionate about connecting blood donors with recipients and bridging the gap in the healthcare industry. 
+                We strive to create a community that fosters empathy, support, and solidarity among individuals who are committed to making a difference.
+              </p> <br>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="container shadow-lg">
+              <br><p class="text-center" style="color: white"> Contact Us </p>
+              
+              <i class="fas fa-envelope" style="color: white;margin: 0px 0px 20px 200px"></i>
+              <a style="color: white">Email : csajibbd@gmail.com</a>
+
+              <i class="fas fa-phone" style="color: white;margin: 0px 0px 20px 200px"></i>
+              <a style="color: white">Phone : 01864963357</a><br>
+             
+               <i class="fab fa-linkedin-in" style="color: white;margin: 0px 5px 20px 200px"></i>
+              <a href="#" class="text-center" style="color: white">Linkedin</a><br>
+          </div>
+        </div>
+    </div>
+  </footer>
+
+</body>
+</html>

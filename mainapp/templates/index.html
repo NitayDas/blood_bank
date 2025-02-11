@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div style="background:linear-gradient(135deg, #ffffff, #a3d2ee);">
+  <div class="album py-5 px-2 px-md-4  px-lg-8">
+    <div class="row">
+        <div class="col-md-5"><br>
+            <img src="{% static 'image/blood-icon.png' %}" alt="ICON" width="70" height="70">
+            <p style="color:hsl(225, 68%, 53%)"><strong>Welcome To the Blood Bank</strong></p>
+            <h2 style="color:hsl(218, 71%, 20%);">Connecting The Donors...</h2>
+            <p class="hero-text">
+              Our mission is to bridge the gap between blood donors and recipients, providing a seamless and efficient experience for both parties.
+              You can trust us,
+              we provide the best service...
+            </p>
+          </div>
+        <div class="col-md-7">
+            <img src="{% static 'image/home.png' %}" alt="ICON" width="100%" height="80%">
+        </div>
+    </div>
+  </div>
+
+  <div class="album pt-2 pb-4">
+      <h4 class="text-center"><strong>Available Donors According To Blood Group</strong></h4><br>
+      <div class="container">
+          <div class="row">
+           {% for i in all_group %}
+           <div class="col-lg-4 col-md-6 col-sm-12 ">
+              <div class="card mb-4 shadow-lg border-success">
+              <div class="card-body">
+              <h5 class="card-text">Blood Group:<strong>{{i.name}}</strong></h5>
+              <h5 class="card-text">Total :<strong>{{i.total}}</strong></h5>
+              <div class="d-flex justify-content-between align-items-center">
+              <a href="/donors_list/{{i.id}}/" class="btn btn-sm btn-info">View All Donors</a>
+              <a href="/donors_list/{{i.id}}/" class="btn btn-sm btn-info">View All Donors</a>
+              </div>
+              </div>
+              </div>
+           </div>
+          {% endfor %}
+         </div>
+      </div>
+    </div>
+  </div>
+
+  
+</div>
+
+
+{% endblock %}

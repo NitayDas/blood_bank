@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from home.models import *
+from mainapp.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.db.models import Count
@@ -62,32 +62,3 @@ def Donor_blood_disapprove(request,request_id):
     request.status=2
     request.save()
     return redirect('/donate_history/')
-
-def donor_list(request): 
-    donors = Donor.objects.all()                  
-    return render(request,'donor_list.html',{'donors':donors})
- 
-def delete_donor(request,id): 
-    donor = Donor.objects.get(pk=id)
-    user = donor.donor       
-    donor.delete()
-    user.delete()
-    messages.success(request,"Donor Deleted Successfully")
-    return redirect('donor_list')
- 
-def patient_list(request): 
-    patients = Patient.objects.all()                  
-    return render(request,'patient_list.html',{'patients':patients})
- 
-def delete_patient(request,id): 
-    patient = Patient.objects.get(pk=id)
-    user = patient.patient       
-    patient.delete()
-    user.delete()
-    messages.success(request,"Patient Deleted Successfully")
-    return redirect('patient_list')
-
-def patient_details(request,id):
-    patient_profile = Patient.objects.get(pk=id)
-    user=patient_profile.patient
-    return render(request, "patient_details.html", {'patient_profile':patient_profile,'user':user})
